@@ -1,17 +1,12 @@
-require('dotenv').config();
-
-let a: number = 3;
-console.log(a);
-
-const Koa = require('koa');
+import * as Koa from 'koa';
 const app = new Koa();
 
-const port = process.env.PORT || 3000;
+const port: string = process.env.PORT;
 
 app.use(async ctx => {
   ctx.body = 'Hello World';
 });
 
 app.listen(port, () => {
-    console.log('server running on port ', port);
+  console.log('server running on port ', port);
 });
