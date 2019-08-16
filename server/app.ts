@@ -1,7 +1,7 @@
 import * as Koa from 'koa';
 const app = new Koa();
 
-const port: string = process.env.PORT;
+const port: number = Number(process.env.PORT);
 
 app.use(async ctx => {
   ctx.body = 'Hello World';
