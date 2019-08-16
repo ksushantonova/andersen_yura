@@ -1,7 +1,8 @@
-import * as Koa from 'koa';
-const app = new Koa();
+import Koa from 'koa';
 
-const port: number = Number(process.env.PORT);
+export const app = new Koa();
+
+export const port: number = Number(process.env.PORT);
 
 app.use(async ctx => {
   ctx.body = 'Hello World';
