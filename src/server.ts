@@ -1,4 +1,4 @@
-export class Server {
+export default class Server {
     koa: any
     port: number
 
