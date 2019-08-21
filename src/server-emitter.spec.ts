@@ -1,26 +1,44 @@
 import ServerEmitter from './server-emitter';
 
+class MockServerEmitter extends ServerEmitter {
+  constructor() {
+    super();
+  }
+}
+
+const payload = {
+  name: 'test1',
+}
+
 describe('emitter', () => {
   it('subscribe', () => {
-    const serverEmitter = new ServerEmitter();
+    const serverEmitter = new MockServerEmitter();
     const fn = jest.fn();
 
     serverEmitter.subscribe('firstChannel', fn);
-    serverEmitter.emit('firstChannel', "Ksusha");
+    expect(serverEmitter.events).toEqual({'firstChannel': fn});
   });
 
   it('unsubscribe', () => {
-    const serverEmitter = new ServerEmitter();
+    const serverEmitter = new MockServerEmitter();
     const fn = jest.fn();
 
     serverEmitter.subscribe('firstChannel', fn);
-    serverEmitter.emit('firstChannel', 'Ksusha');
+    expect(serverEmitter.events).toEqual({'firstChannel': fn});
     serverEmitter.unsubscribe('firstChannel');
-    serverEmitter.emit('firstChannel', "Ksusha");
+    expect(serverEmitter.events).toEqual({});
+    serverEmitter.emit('firstChannel', payload);
+    expect(fn).not.toHaveBeenCalled();
+  });
 
+  it('emit', () => {
+    const serverEmitter = new MockServerEmitter();
+    const fn = jest.fn((data) => data);
+
+    serverEmitter.subscribe('firstChannel', fn);
+    serverEmitter.emit('firstChannel', payload);
     expect(fn).toHaveBeenCalledTimes(1);
-    expect(fn).toHaveBeenCalledWith("Ksusha");
+    expect(serverEmitter.emit('firstChannel', payload)).toEqual(payload);
   });
 });
 
-// написать тест на подписку
