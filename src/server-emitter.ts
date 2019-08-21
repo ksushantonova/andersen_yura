@@ -1,7 +1,6 @@
 export default class ServerEmitter {
-
   events: any
-
+  
   constructor() {
     this.events = {};
   }
@@ -13,14 +12,14 @@ export default class ServerEmitter {
     }
   }
 
-  unsubscribe(channel: string){
+  unsubscribe(channel: string) {
     if (this.events.hasOwnProperty(channel)) {
       delete this.events[channel];
       return this.events;
     }
   }
 
-  emit(channel: string, payload: any){
+  emit(channel: string, payload: any) {
     if (this.events.hasOwnProperty(channel)) {
       return this.events[channel](payload);
     }
