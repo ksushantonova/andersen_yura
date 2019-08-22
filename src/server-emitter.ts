@@ -1,5 +1,5 @@
 export default class ServerEmitter {
-  events: any
+  private events: any;
   
   constructor() {
     this.events = {};
@@ -23,5 +23,9 @@ export default class ServerEmitter {
     if (this.events.hasOwnProperty(channel)) {
       return this.events[channel](payload);
     }
+  }
+
+  getEvents() {
+    return this.events;
   }
 }

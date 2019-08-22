@@ -14,19 +14,21 @@ describe('emitter', () => {
   it('subscribe', () => {
     const serverEmitter = new MockServerEmitter();
     const fn = jest.fn();
+    const events = serverEmitter.getEvents();
 
     serverEmitter.subscribe('firstChannel', fn);
-    expect(serverEmitter.events).toEqual({'firstChannel': fn});
+    expect(events).toEqual({'firstChannel': fn});
   });
 
   it('unsubscribe', () => {
     const serverEmitter = new MockServerEmitter();
     const fn = jest.fn();
+    const events = serverEmitter.getEvents();
 
     serverEmitter.subscribe('firstChannel', fn);
-    expect(serverEmitter.events).toEqual({'firstChannel': fn});
+    expect(events).toEqual({'firstChannel': fn});
     serverEmitter.unsubscribe('firstChannel');
-    expect(serverEmitter.events).toEqual({});
+    expect(events).toEqual({});
     serverEmitter.emit('firstChannel', payload);
     expect(fn).not.toHaveBeenCalled();
   });
