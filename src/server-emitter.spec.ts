@@ -20,7 +20,7 @@ describe('emitter', () => {
     const fn = jest.fn();
 
     serverEmitter.subscribe('firstChannel', fn);
-    expect(serverEmitter.getEvents).toEqual({'firstChannel': fn});
+    expect(serverEmitter.getEvents()).toEqual({'firstChannel': fn});
   });
 
   it('unsubscribe', () => {
@@ -28,10 +28,10 @@ describe('emitter', () => {
     const fn = jest.fn();
 
     serverEmitter.subscribe('firstChannel', fn);
-    expect(serverEmitter.getEvents).toEqual({'firstChannel': fn});
+    expect(serverEmitter.getEvents()).toEqual({'firstChannel': fn});
 
     serverEmitter.unsubscribe('firstChannel');
-    expect(serverEmitter.getEvents).toEqual({});
+    expect(serverEmitter.getEvents()).toEqual({});
 
     serverEmitter.emit('firstChannel', payload);
     expect(fn).not.toHaveBeenCalled();
