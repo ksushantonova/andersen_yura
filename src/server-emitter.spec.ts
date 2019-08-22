@@ -4,6 +4,10 @@ class MockServerEmitter extends ServerEmitter {
   constructor() {
     super();
   }
+
+  getEvents() {
+    return this.events;
+  }
 }
 
 const payload = {
@@ -14,21 +18,21 @@ describe('emitter', () => {
   it('subscribe', () => {
     const serverEmitter = new MockServerEmitter();
     const fn = jest.fn();
-    const events = serverEmitter.getEvents();
 
     serverEmitter.subscribe('firstChannel', fn);
-    expect(events).toEqual({'firstChannel': fn});
+    expect(serverEmitter.getEvents).toEqual({'firstChannel': fn});
   });
 
   it('unsubscribe', () => {
     const serverEmitter = new MockServerEmitter();
     const fn = jest.fn();
-    const events = serverEmitter.getEvents();
 
     serverEmitter.subscribe('firstChannel', fn);
-    expect(events).toEqual({'firstChannel': fn});
+    expect(serverEmitter.getEvents).toEqual({'firstChannel': fn});
+
     serverEmitter.unsubscribe('firstChannel');
-    expect(events).toEqual({});
+    expect(serverEmitter.getEvents).toEqual({});
+
     serverEmitter.emit('firstChannel', payload);
     expect(fn).not.toHaveBeenCalled();
   });
@@ -39,6 +43,7 @@ describe('emitter', () => {
 
     serverEmitter.subscribe('firstChannel', fn);
     serverEmitter.emit('firstChannel', payload);
+
     expect(fn).toHaveBeenCalledTimes(1);
     expect(serverEmitter.emit('firstChannel', payload)).toEqual(payload);
   });

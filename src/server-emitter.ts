@@ -1,5 +1,5 @@
 export default class ServerEmitter {
-  private events: any;
+  protected events: any;
   
   constructor() {
     this.events = {};
@@ -8,14 +8,12 @@ export default class ServerEmitter {
   subscribe(channel: string, event: Function) {
     if (!this.events.hasOwnProperty(channel)) {
       this.events[channel] = event;
-      return this.events;
     }
   }
 
   unsubscribe(channel: string) {
     if (this.events.hasOwnProperty(channel)) {
       delete this.events[channel];
-      return this.events;
     }
   }
 
@@ -23,9 +21,5 @@ export default class ServerEmitter {
     if (this.events.hasOwnProperty(channel)) {
       return this.events[channel](payload);
     }
-  }
-
-  getEvents() {
-    return this.events;
   }
 }
