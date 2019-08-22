@@ -1,6 +1,6 @@
 export default class ServerEmitter {
   protected events: any;
-  
+
   constructor() {
     this.events = {};
   }

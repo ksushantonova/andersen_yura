@@ -1,15 +1,15 @@
-import Server from './server';
-    
+import server from './server';
+
 const koa = {
-    listen: jest.fn(),
-    use: jest.fn(),
+  listen: jest.fn(),
+  use: jest.fn(),
 };
 
 describe('server', () => {
-    it('shows if koa have been inited', () => {
-        const server = new Server(koa);
-        server.start();
+  it('shows if koa have been inited', () => {
+    const httpServer = new server(koa);
+    httpServer.start();
 
-        expect(koa.listen).toHaveBeenCalledTimes(1);
-    });
+    expect(koa.listen).toHaveBeenCalledTimes(1);
+  });
 });

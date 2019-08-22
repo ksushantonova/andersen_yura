@@ -1,6 +1,6 @@
-import Koa from 'koa';
-import Server from './server';
+import koa from 'koa';
+import server from './server';
 
-const app = new Koa();
-const server = new Server(app);
-server.start();
+const app = new koa();
+const httpServer = new server(app);
+httpServer.start();
